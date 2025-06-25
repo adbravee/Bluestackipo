@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 text-center">
+            <div class="card p-4 shadow-sm">
+                <h2 class="mb-3 text-success">Registration Successful!</h2>
+                <p class="lead">Thank you, <strong>{{ username }}</strong>, for registering.</p>
+                <p>Your account is pending approval by a superuser. You will be able to log in and access admin features once your account is approved.</p>
+                <a href="/login/" class="btn btn-primary mt-3">Back to Login</a>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

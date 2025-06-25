@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Companies</h2>
+    <a href="{% url 'company_add' %}" class="btn btn-primary mb-3">Add Company</a>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Logo</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for company in companies %}
+            <tr>
+                <td>{{ company.company_name }}</td>
+                <td>
+                    {% if company.company_logo %}
+                        <img src="{{ company.company_logo.url }}" alt="Logo" width="50" height="50" class="rounded-circle">
+                    {% else %}
+                        <span class="text-muted">No Logo</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'company_edit' company.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'company_delete' company.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="3" class="text-center">No companies found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %} 

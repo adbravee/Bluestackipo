@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2>Documents</h2>
+    <a href="{% url 'document_add' %}" class="btn btn-primary mb-3">Add Document</a>
+    <table class="table table-bordered table-hover">
+        <thead>
+            <tr>
+                <th>IPO</th>
+                <th>RHP PDF</th>
+                <th>DRHP PDF</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for document in documents %}
+            <tr>
+                <td>{{ document.ipo }}</td>
+                <td>
+                    {% if document.rhp_pdf %}
+                        <a href="{{ document.rhp_pdf.url }}" target="_blank">RHP PDF</a>
+                    {% else %}
+                        <span class="text-muted">No RHP</span>
+                    {% endif %}
+                </td>
+                <td>
+                    {% if document.drhp_pdf %}
+                        <a href="{{ document.drhp_pdf.url }}" target="_blank">DRHP PDF</a>
+                    {% else %}
+                        <span class="text-muted">No DRHP</span>
+                    {% endif %}
+                </td>
+                <td>
+                    <a href="{% url 'document_edit' document.pk %}" class="btn btn-sm btn-warning">Edit</a>
+                    <a href="{% url 'document_delete' document.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                </td>
+            </tr>
+            {% empty %}
+            <tr><td colspan="4" class="text-center">No documents found.</td></tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %} 

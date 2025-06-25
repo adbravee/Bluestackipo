@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container py-5">
+    <div class="row">
+        <div class="col-md-4 text-center">
+            {% if ipo.company.company_logo %}
+                <img src="{{ ipo.company.company_logo.url }}" alt="Logo" width="120" height="120" class="rounded-circle mb-3 border border-3">
+            {% endif %}
+            <h3 class="fw-bold text-primary">{{ ipo.company.company_name }}</h3>
+            <span class="badge bg-primary bg-opacity-10 text-primary mb-2">{{ ipo.status }}</span>
+        </div>
+        <div class="col-md-8">
+            <h4 class="fw-semibold mb-3">IPO Details</h4>
+            <table class="table table-bordered align-middle">
+                <tr><th>Price Band</th><td>{{ ipo.price_band }}</td></tr>
+                <tr><th>Open Date</th><td>{{ ipo.open_date }}</td></tr>
+                <tr><th>Close Date</th><td>{{ ipo.close_date }}</td></tr>
+                <tr><th>Issue Size</th><td>{{ ipo.issue_size }}</td></tr>
+                <tr><th>Issue Type</th><td>{{ ipo.issue_type }}</td></tr>
+                <tr><th>Listing Date</th><td>{{ ipo.listing_date }}</td></tr>
+                <tr><th>IPO Price</th><td>{{ ipo.ipo_price }}</td></tr>
+                <tr><th>Listing Price</th><td>{{ ipo.listing_price }}</td></tr>
+                <tr><th>Listing Gain</th><td>{{ ipo.listing_gain }}%</td></tr>
+                <tr><th>Current Market Price (CMP)</th><td>{{ ipo.current_market_price }}</td></tr>
+                <tr><th>Current Return</th><td>{{ ipo.current_return }}%</td></tr>
+            </table>
+            <h5 class="fw-semibold mt-4">Documents</h5>
+            <ul class="list-unstyled">
+                {% for doc in documents %}
+                    <li class="mb-2">
+                        {% if doc.rhp_pdf %}<a href="{{ doc.rhp_pdf.url }}" target="_blank" class="btn btn-link p-0">RHP PDF <i class="bi bi-file-earmark-pdf"></i></a>{% endif %}
+                        {% if doc.drhp_pdf %} | <a href="{{ doc.drhp_pdf.url }}" target="_blank" class="btn btn-link p-0">DRHP PDF <i class="bi bi-file-earmark-pdf"></i></a>{% endif %}
+                    </li>
+                {% empty %}
+                    <li>No documents available.</li>
+                {% endfor %}
+            </ul>
+            <a href="{% url 'public_ipo_list' %}" class="btn btn-secondary mt-3"><i class="bi bi-arrow-left"></i> Back to IPO List</a>
+        </div>
+    </div>
+</div>
+{% endblock %} 

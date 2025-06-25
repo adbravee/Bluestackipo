@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h2>IPOs</h2>
+    <a href="{% url 'ipo_add' %}" class="btn btn-success mb-3">Add IPO</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Company</th>
+                <th>Price Band</th>
+                <th>Open Date</th>
+                <th>Close Date</th>
+                <th>Status</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ipo in ipos %}
+            <tr>
+                <td>{{ ipo.company.company_name }}</td>
+                <td>{{ ipo.price_band }}</td>
+                <td>{{ ipo.open_date }}</td>
+                <td>{{ ipo.close_date }}</td>
+                <td>{{ ipo.status }}</td>
+                <td>
+                    <a href="{% url 'ipo_edit' ipo.pk %}" class="btn btn-primary btn-sm">Edit</a>
+                    <a href="{% url 'ipo_delete' ipo.pk %}" class="btn btn-danger btn-sm">Delete</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <a href="{% url 'admin_dashboard' %}" class="btn btn-secondary mt-3">Back to Dashboard</a>
+</div>
+{% endblock %} 
